@@ -50,12 +50,14 @@ public class MongoDbSink : ILogEventSink
 
         if (logEvent.Properties.TryGetValue("StatusCode", out var statusCode))
         {
-            if (int.TryParse(statusCode.ToString(), out var code))
+            var statusCodeStr = statusCode.ToString().Trim('"');
+            if (int.TryParse(statusCodeStr, out var code))
             {
                 logEntry.StatusCode = code;
             }
         }
 
-        _collection.InsertOne(logEntry);
+        // Use fire-and-forget pattern to avoid blocking
+        Task.Run(async () => await _collection.InsertOneAsync(logEntry));
     }
 }

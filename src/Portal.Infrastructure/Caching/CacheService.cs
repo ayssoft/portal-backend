@@ -53,14 +53,11 @@ public class CacheService
     /// </summary>
     public async Task<T> GetOrCreateAsync<T>(string key, Func<Task<T>> factory)
     {
-        if (_cache.TryGetValue(key, out T? cachedValue) && cachedValue != null)
+        return await _cache.GetOrCreateAsync(key, async entry =>
         {
-            return cachedValue;
-        }
-
-        var value = await factory();
-        Set(key, value);
-        return value;
+            entry.SetOptions(_defaultOptions);
+            return await factory();
+        }) ?? throw new InvalidOperationException("Factory returned null value");
     }
 
     /// <summary>

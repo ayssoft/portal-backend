@@ -62,7 +62,7 @@ Web API katmanı:
 ## 🛠️ Teknolojiler
 
 - .NET 8.0
-- MongoDB 2.25.0
+- MongoDB 2.28.0
 - Serilog 4.0.0
 - ASP.NET Core Web API
 - Swagger/OpenAPI

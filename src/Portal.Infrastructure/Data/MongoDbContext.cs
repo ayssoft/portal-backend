@@ -35,6 +35,6 @@ public class MongoDbContext
         var attribute = (BsonCollectionAttribute?)Attribute.GetCustomAttribute(
             typeof(T), typeof(BsonCollectionAttribute));
 
-        return attribute?.CollectionName ?? typeof(T).Name.ToLowerInvariant();
+        return attribute?.CollectionName ?? typeof(T).Name;
     }
 }
