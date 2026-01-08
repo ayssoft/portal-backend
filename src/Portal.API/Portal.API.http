@@ -1,0 +1,45 @@
+@Portal.API_HostAddress = http://localhost:5000
+
+### Get All Users
+GET {{Portal.API_HostAddress}}/api/users
+Accept: application/json
+
+###
+
+### Get User By ID
+GET {{Portal.API_HostAddress}}/api/users/507f1f77bcf86cd799439011
+Accept: application/json
+
+###
+
+### Create New User
+POST {{Portal.API_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "john@example.com",
+  "passwordHash": "hashedpassword123",
+  "isActive": true
+}
+
+###
+
+### Update User
+PUT {{Portal.API_HostAddress}}/api/users/507f1f77bcf86cd799439011
+Content-Type: application/json
+
+{
+  "username": "johndoe_updated",
+  "email": "john.updated@example.com",
+  "passwordHash": "hashedpassword123",
+  "isActive": true
+}
+
+###
+
+### Delete User
+DELETE {{Portal.API_HostAddress}}/api/users/507f1f77bcf86cd799439011
+Accept: application/json
+
+###
