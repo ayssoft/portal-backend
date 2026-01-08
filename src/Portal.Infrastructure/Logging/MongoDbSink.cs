@@ -58,6 +58,17 @@ public class MongoDbSink : ILogEventSink
         }
 
         // Use fire-and-forget pattern to avoid blocking
-        Task.Run(async () => await _collection.InsertOneAsync(logEntry));
+        // Exceptions are intentionally not observed as logging should not fail the application
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                await _collection.InsertOneAsync(logEntry).ConfigureAwait(false);
+            }
+            catch
+            {
+                // Silently fail - logging errors should not crash the application
+            }
+        });
     }
 }

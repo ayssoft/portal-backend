@@ -48,7 +48,6 @@ public class MongoRepository<T> : IRepository<T> where T : BaseEntity
     public async Task<T> CreateAsync(T entity, CancellationToken cancellationToken = default)
     {
         entity.CreatedAt = DateTime.UtcNow;
-        entity.UpdatedAt = null;
         entity.IsDeleted = false;
 
         await _collection.InsertOneAsync(entity, cancellationToken: cancellationToken);

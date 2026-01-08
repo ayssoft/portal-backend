@@ -57,7 +57,7 @@ public class CacheService
         {
             entry.SetOptions(_defaultOptions);
             return await factory();
-        }) ?? throw new InvalidOperationException("Factory returned null value");
+        }) ?? throw new InvalidOperationException($"Cache factory returned null value for key: {key}");
     }
 
     /// <summary>
